@@ -19,18 +19,22 @@ function searchCountry(event) {
 
     const countryName = event.target.value.trim();
 
-    if (countryName !== 0) {
+    if (countryName !== "") {
         fetchCountry(countryName).then(filterCountry).catch(fetchError);
     }
     else {
+
         countryList.innerHTML = "";
         countryInfo.innerHTML = "";
+        
     }
 }
 
 function filterCountry(country) {
     if (country.length > 10) {
         Notify.info("Too many matches found. Please enter a more specific name.")
+        
+        countryInfo.innerHTML = "";
     }
     else if ((country.length > 1) && (country <= 10)) {
         countryList.innerHTML = country.map(({ name, flags }) => {
